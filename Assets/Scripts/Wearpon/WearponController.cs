@@ -39,10 +39,11 @@ public class WearponController : MonoBehaviour
 
 	public void SwitchWearpon ()
 	{
-		wearpons[wearponCounter].gameObject.SetActive(false);
-		wearpons [++WearponID].gameObject.SetActive (true);
+		wearpons[WearponID].gameObject.SetActive(false);
+		WearponID ++;
+		wearpons [WearponID].gameObject.SetActive (true);
 
-		currentWearpon = wearpons [++WearponID];
+		currentWearpon = wearpons [WearponID];
 	}
 
 	private void HideWearpons ()

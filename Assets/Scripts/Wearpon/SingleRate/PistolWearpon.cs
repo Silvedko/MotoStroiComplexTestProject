@@ -11,9 +11,14 @@ public class PistolWearpon : BasicWearpon
 
 		this.fireRate = pistolFireRate;
 	}
-	
-	protected override void OnFireButtonPressed ()
+
+	protected override void Update ()
 	{
-		
+		base.Update();
+	}
+	
+	public override void OnFireButtonPressed ()
+	{
+		base.OnFireButtonPressed();
 	}
 }

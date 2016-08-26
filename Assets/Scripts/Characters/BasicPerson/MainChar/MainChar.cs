@@ -11,18 +11,14 @@ public class MainChar : BasicPerson
 	{
 		this.gameObject.transform.localPosition = position;
 
-
-
-		TouchController.OnSecondMouseButtonPressed += delegate 
-		{
-			SwitchWearpon ();
-		};
+		TouchController.OnSecondMouseButtonPressed += delegate {SwitchWearpon ();};
 
 		if(hitPoints > 0)
 			HitPoints = hitPoints;
 		else 
 			Debug.LogWarning ("HitPoints must be positive!");
 	}
+		
 
 	void SwitchWearpon ()
 	{
@@ -31,7 +27,7 @@ public class MainChar : BasicPerson
 
 	void Start () 
 	{
-		wpController = GetComponentInChildren <WearponController> ();
+		wpController = FindObjectOfType <WearponController> ();
 	}
 
 

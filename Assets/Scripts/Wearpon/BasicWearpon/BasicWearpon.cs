@@ -4,16 +4,31 @@ using UnityEngine.UI;
 
 public abstract class BasicWearpon : MonoBehaviour
 {
-	protected float fireRate = 0;
+	public BulletController bulletController = null;
 
-	void Start ()
+	protected float fireRate = 0;
+	protected float timeAfterShot = 0;
+	protected bool canFire = true;
+
+	protected virtual void Update ()
 	{
+		timeAfterShot += Time.deltaTime;
+
+		if(timeAfterShot >= 1/fireRate)
+		{
+			canFire = true;
+			timeAfterShot = 0;
+		}
 
 	}
 
-	protected virtual void OnFireButtonPressed ()
+	public virtual void OnFireButtonPressed ()
 	{
-		Debug.Log ("Fire!!");
+		if(bulletController && canFire)
+		{
+			bulletController.MakeShot();
+			canFire = false;
+		}
 	}
 		
 }

@@ -27,7 +27,12 @@ public abstract class BasicMonster : BasicPerson
 		this.moveStrategy = moveStrategyArg;
 	}
 
-	public void OnDead ()
+	public void EnableMonster ()
+	{
+		gameObject.SetActive (true);
+	}
+
+	public override void OnDead ()
 	{
 		gameObject.SetActive(false);
 		MainSceneManager.Instance.CurrentMonstersCount --;

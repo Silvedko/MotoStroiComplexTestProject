@@ -6,7 +6,6 @@ public class CameraController : MonoBehaviour {
 	public Transform target;
 	public float lookSmooth = 0.09f;
 	public Vector3 offsetFromTarget = new Vector3 (0, 6, -8);
-	float xTilt = 10f;
 
 	Vector3 destination = Vector3.zero;
 	CharacterController characterController;

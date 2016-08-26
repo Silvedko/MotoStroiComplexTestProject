@@ -3,7 +3,6 @@ using System.Collections;
 
 public class AutomaticWearpon : BasicWearpon 
 {
-
 	float automaticFireRate = 3f;
 
 	void Start () 
@@ -13,8 +12,13 @@ public class AutomaticWearpon : BasicWearpon
 		this.fireRate = automaticFireRate;
 	}
 
-	protected override void OnFireButtonPressed ()
+	protected override void Update ()
 	{
+		base.Update();
+	}
 
+	public override void OnFireButtonPressed ()
+	{
+		base.OnFireButtonPressed();
 	}
 }

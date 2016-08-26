@@ -16,6 +16,14 @@ public class SimpleBullet : BasicBullet
 
 		if(col.gameObject.GetComponent <IHittable> () != null)
 			col.gameObject.GetComponent <IHittable> ().ReduceHitPoints (damage);
+
+		Destroy(this.gameObject);
+	}
+
+	void Update ()
+	{
+		if (Vector3.Magnitude(gameObject.transform.position) > GameConstants.AREA_SIZE )
+			Destroy(this.gameObject);
 	}
 
 	public override void Hit ()
