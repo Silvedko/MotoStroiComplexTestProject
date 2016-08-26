@@ -27,11 +27,20 @@ public abstract class BasicPerson : MonoBehaviour, IHittable
 				{
 					OnZeroHitPointsEvent();
 				}
-				OnDead();
+				OnDead ();
 			}
 		}
 	}
 	private float hitPoints;
+
+	public virtual void Init (Vector3 position, float hitPoints)
+	{
+		this.gameObject.transform.localPosition = position;
+		if(hitPoints > 0)
+			HitPoints = hitPoints;
+		else 
+			Debug.LogWarning ("HitPoints must be positive!");
+	}
 
 	#region IHittabble Interface implementation
 
@@ -46,12 +55,12 @@ public abstract class BasicPerson : MonoBehaviour, IHittable
 	/// <param name="hp">Hp.</param>
 	public virtual void ReduceHitPoints (float hp)
 	{
-		Debug.Log ("REduce!");
+		Debug.Log ("Reduce!");
 	}
 
 	public virtual void OnDead ()
 	{
-		Debug.Log ("OnDead!");
+		Debug.Log ("On Dead!");
 	}
 
 	#endregion

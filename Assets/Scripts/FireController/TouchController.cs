@@ -16,5 +16,6 @@ public class TouchController : MonoSingleton <TouchController>
 		if(Input.GetMouseButtonDown(1))
 			if(OnSecondMouseButtonPressed != null)
 				OnSecondMouseButtonPressed();
+
 	}
 }

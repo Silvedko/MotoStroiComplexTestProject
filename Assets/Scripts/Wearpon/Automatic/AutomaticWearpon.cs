@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AutomaticWearpon : MonoBehaviour {
+public class AutomaticWearpon : BasicWearpon 
+{
 
-	// Use this for initialization
-	void Start () {
-	
+	float automaticFireRate = 3f;
+
+	void Start () 
+	{
+		TouchController.OnFirstMouseButtonPressed += delegate() { OnFireButtonPressed (); };
+
+		this.fireRate = automaticFireRate;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	protected override void OnFireButtonPressed ()
+	{
+
 	}
 }

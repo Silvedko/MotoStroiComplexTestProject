@@ -1,24 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class MainChar : BasicPerson 
 {
-	public MainChar (float startHP)
+	WearponController wpController = null;
+
+	public override void Init (Vector3 position, float hitPoints)
 	{
-		HitPoints = startHP;
-	}
+		this.gameObject.transform.localPosition = position;
 
 
-	// Use this for initialization
-	void Start () {
-	
+
+		TouchController.OnSecondMouseButtonPressed += delegate 
+		{
+			SwitchWearpon ();
+		};
+
+		if(hitPoints > 0)
+			HitPoints = hitPoints;
+		else 
+			Debug.LogWarning ("HitPoints must be positive!");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void SwitchWearpon ()
+	{
+		wpController.SwitchWearpon();
 	}
+
+	void Start () 
+	{
+		wpController = GetComponentInChildren <WearponController> ();
+	}
+
 
 	public override void ReduceHitPoints (float hp)
 	{
@@ -29,15 +44,15 @@ public class MainChar : BasicPerson
 	{
 		try
 		{
-			BasicBullet bullet = col.gameObject.GetComponent<BasicBullet> ();
-			if(bullet != null)
+			BasicMonster monster = col.gameObject.GetComponent<BasicMonster> ();
+			if(monster != null)
 			{
-				//ReduceHitPoints (bullet);
+				ReduceHitPoints (GameConstants.REDUCING_HP_FROM_MONSTERS);
 			}
 		}
 		catch (NullReferenceException)
 		{
-			//It's not a bullet
+			//It's not a monster
 		}
 	}
 }

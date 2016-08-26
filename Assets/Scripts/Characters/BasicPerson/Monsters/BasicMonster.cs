@@ -6,21 +6,31 @@ using System.Collections;
 /// </summary>
 public enum MonsterType : int
 {
-	BASIC = 0,
+	SIMPLE = 0,
 	FAT,
 	SPEEDY
 }
 
 public abstract class BasicMonster : BasicPerson 
 {
+	
+	protected IMovable moveStrategy;
 
-	// Use this for initialization
-	void Start () {
-	
+	public override void Init (Vector3 position, float hitPoints)
+	{
+		base.Init (position, hitPoints);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public virtual void InitMonster (Vector3 position, float hitPoints, IMovable moveStrategyArg)
+	{
+		Init (position, hitPoints);
+		this.moveStrategy = moveStrategyArg;
 	}
+
+	public void OnDead ()
+	{
+		gameObject.SetActive(false);
+		MainSceneManager.Instance.CurrentMonstersCount --;
+	}
+		
 }
