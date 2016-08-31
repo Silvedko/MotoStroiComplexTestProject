@@ -55,7 +55,8 @@ public abstract class BasicPerson : MonoBehaviour, IHittable
 	/// <param name="hp">Hp.</param>
 	public virtual void ReduceHitPoints (float hp)
 	{
-		Debug.Log ("Reduce!");
+		Debug.Log ("Reduce! " + hp + " Ostalos' " + GetHitPoints());
+		HitPoints -= hp;
 	}
 
 	public virtual void OnDead ()

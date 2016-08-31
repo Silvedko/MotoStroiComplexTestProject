@@ -3,21 +3,22 @@ using System.Collections;
 
 public class FollowMonsterMovement : MonoBehaviour, IMovable 
 {
-	public float speed = 0.01f;
+	public float speed = 0.008f;
 	public GameObject target = null;
 
 
-	void Start ()
-	{
-		
-	}
-
-	void OnEnable ()
+	void Awake ()
 	{
 		MainSceneManager.Instance.MainCharInit += delegate 
 		{
 			SetTarget ();
 		};
+	}
+
+	void OnEnable ()
+	{
+		if (target == null)
+			SetTarget ();
 	}
 
 	void Update ()

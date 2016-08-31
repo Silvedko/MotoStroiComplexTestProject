@@ -7,8 +7,8 @@ public class FatMonster : BasicMonster
 
 	public override void InitMonster (Vector3 position, float hitPoints, IMovable moveStrategyArg = null)
 	{
-		Init (position, hitPoints);
-		this.moveStrategy = moveStrategyArg;
+		base.InitMonster (position, hitPoints, moveStrategyArg);
+
 	}
 
 	public override void ReduceHitPoints (float hp)

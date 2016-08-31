@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour {
 	public Vector3 offsetFromTarget = new Vector3 (0, 6, -8);
 
 	Vector3 destination = Vector3.zero;
-	CharacterController characterController;
+	CharController characterController;
 	float rotateVelocity = 0;
 
 	// Use this for initialization
@@ -29,12 +29,12 @@ public class CameraController : MonoBehaviour {
 
 		if(target != null)
 		{
-			if(target.GetComponent<CharacterController> ())
+			if(target.GetComponent<CharController> ())
 			{
-				characterController = target.GetComponent<CharacterController> ();
+				characterController = target.GetComponent<CharController> ();
 			}
 			else 
-				Debug.LogError ("Camera's target needs to CharacterController");
+				Debug.LogError ("Camera's target needs to CharController");
 		}
 		else
 			Debug.LogError ("Need to set target");

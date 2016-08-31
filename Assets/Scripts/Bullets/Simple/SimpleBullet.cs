@@ -22,12 +22,12 @@ public class SimpleBullet : BasicBullet
 
 	void Update ()
 	{
-		if (Vector3.Magnitude(gameObject.transform.position) > GameConstants.AREA_SIZE )
-			Destroy(this.gameObject);
+			
 	}
 
 	public override void Hit ()
 	{
+		base.Hit ();
 		//Do smth. Explode or particle amination.
 	}
 }

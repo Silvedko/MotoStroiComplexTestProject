@@ -18,7 +18,7 @@ public abstract class BasicBullet : MonoBehaviour, IDamageDealer
 
 	public virtual void Hit ()
 	{
-
+		Destroy(this.gameObject);
 	}
 
 }

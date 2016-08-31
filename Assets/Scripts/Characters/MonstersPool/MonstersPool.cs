@@ -8,6 +8,11 @@ public class MonstersPool : MonoSingleton <MonstersPool>
 	public delegate void MonstersPoolDelegate ();
 	public event MonstersPoolDelegate PoolIsFull;
 
+	public MonsterRespawnsData respawnData;
+	[HideInInspector]
+
+	private int respCount = 0;
+
 	public List <GameObject> basicMonstersPrefabs;
 
 	//[HideInInspector]
@@ -95,7 +100,7 @@ public class MonstersPool : MonoSingleton <MonstersPool>
 				var sMonster = m.GetComponent<SimpleMonster> ();
 				var iMoveStrategy = m.AddComponent<FollowMonsterMovement> ();
 
-				sMonster.InitMonster(Vector3.zero, 20f, iMoveStrategy);
+				sMonster.InitMonster(Vector3.zero, 10f, iMoveStrategy);
 			}
 		}
 		return m;
@@ -116,7 +121,7 @@ public class MonstersPool : MonoSingleton <MonstersPool>
 				m = CreateMonsterGO (monsterPrefab);
 				var sMonster = m.GetComponent<FatMonster> ();
 				var iMoveStrategy = m.AddComponent<FollowMonsterMovement> ();
-				sMonster.InitMonster(Vector3.zero, 30f, iMoveStrategy);
+				sMonster.InitMonster(Vector3.zero, 15f, iMoveStrategy);
 			}
 		}
 		return m;
@@ -137,7 +142,7 @@ public class MonstersPool : MonoSingleton <MonstersPool>
 				m = CreateMonsterGO (monsterPrefab);
 				var sMonster = m.GetComponent<SpeedyMonster> ();
 				var iMoveStrategy = m.AddComponent<FollowMonsterMovement> ();
-				sMonster.InitMonster(Vector3.zero, 20f, iMoveStrategy);
+				sMonster.InitMonster(m.transform.position, 10f, iMoveStrategy);
 			}
 		}
 		return m;
@@ -146,6 +151,11 @@ public class MonstersPool : MonoSingleton <MonstersPool>
 	private GameObject CreateMonsterGO (GameObject go)
 	{
 		var m = Instantiate (go);
+
+		if (respCount >= respawnData.respawns.Count-1)
+			respCount = 0;
+
+		m.transform.position = respawnData.respawns [++respCount].position;
 		m.transform.SetParent(this.transform);
 		m.SetActive (false);
 		return m;

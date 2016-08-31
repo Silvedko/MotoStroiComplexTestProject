@@ -11,8 +11,11 @@ public class BulletController : MonoBehaviour
 	public void MakeShot () 
 	{
 		var bullet = CreateBullet (bulletPrefab);
+		bullet.transform.Rotate (Vector3.left * 90);
 
 		bullet.GetComponent<Rigidbody> ().AddForce(transform.forward * bulletSpeed);
+
+		Destroy (bullet, 5f);
 	}
 
 

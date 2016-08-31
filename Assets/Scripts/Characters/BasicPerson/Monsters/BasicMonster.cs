@@ -27,6 +27,11 @@ public abstract class BasicMonster : BasicPerson
 		this.moveStrategy = moveStrategyArg;
 	}
 
+	public override void ReduceHitPoints (float hp)
+	{
+		base.ReduceHitPoints (hp);
+	}
+
 	public void EnableMonster ()
 	{
 		gameObject.SetActive (true);
