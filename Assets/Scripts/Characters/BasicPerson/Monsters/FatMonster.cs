@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FatMonster : BasicMonster 
+public class FatMonster : MonsterBase 
 {
 	public float armor = 0.7f;
 
-	public override void InitMonster (Vector3 position, float hitPoints, IMovable moveStrategyArg = null)
+	public override void InitMonster (Vector3 position, float hitPoints, float damage, IMovable moveStrategyArg = null)
 	{
-		base.InitMonster (position, hitPoints, moveStrategyArg);
+		base.InitMonster (position, hitPoints, damage, moveStrategyArg);
 
 	}
 
-	public override void ReduceHitPoints (float hp)
+	public override void ReceiveDamage (IDamageDealer damageDealer)
 	{
-		HitPoints -= hp * armor;
+		HitPoints -= damageDealer.Damage * armor;
 	}
 }

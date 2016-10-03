@@ -6,10 +6,16 @@ using System.Collections;
 /// </summary>
 
 [RequireComponent (typeof (Collider))]
-public abstract class BasicPerson : MonoBehaviour, IHittable 
+public class PersonBase : MonoBehaviour, IHittable 
 {
 	public delegate void BasicPersonDelegate();
 	public event BasicPersonDelegate OnZeroHitPointsEvent;
+
+	public float Armor { get { return m_armor; } set { m_armor = value; }}
+	private float m_armor;
+
+	public bool IsDead { get { return m_IsDead; } set { m_IsDead = value; }}
+	private bool m_IsDead;
 
 	public float HitPoints
 	{
@@ -17,7 +23,7 @@ public abstract class BasicPerson : MonoBehaviour, IHittable
 		{
 			return hitPoints;
 		}
-		protected set 
+		set 
 		{
 			hitPoints = value;
 			if(hitPoints <= 0)
@@ -44,19 +50,13 @@ public abstract class BasicPerson : MonoBehaviour, IHittable
 
 	#region IHittabble Interface implementation
 
-	public float GetHitPoints ()
-	{
-		return HitPoints;
-	}
-
 	/// <summary>
 	/// Reduces the hit points. Implementation of IHittable interface.
 	/// </summary>
 	/// <param name="hp">Hp.</param>
-	public virtual void ReduceHitPoints (float hp)
+	public virtual void ReceiveDamage (IDamageDealer damageDealer)
 	{
-		Debug.Log ("Reduce! " + hp + " Ostalos' " + GetHitPoints());
-		HitPoints -= hp;
+		HitPoints -= damageDealer.Damage;
 	}
 
 	public virtual void OnDead ()

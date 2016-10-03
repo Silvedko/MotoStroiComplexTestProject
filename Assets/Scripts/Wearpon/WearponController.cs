@@ -4,15 +4,12 @@ using System.Collections.Generic;
 
 public class WearponController : MonoBehaviour 
 {
-	public List <BasicWearpon> wearpons;
-	public BasicWearpon currentWearpon;
+	public List <WearponBase> wearpons;
+	public WearponBase currentWearpon;
 
 	public int WearponID 
 	{
-		get 
-		{
-			return wearponCounter;
-		}
+		get{ return wearponCounter; }
 		set 
 		{
 			if(wearponCounter >= wearpons.Count - 1)
@@ -22,6 +19,21 @@ public class WearponController : MonoBehaviour
 		}
 	}
 	private int wearponCounter = 0;
+
+	public void SwitchWearpon ()
+	{
+		wearpons[WearponID].gameObject.SetActive(false);
+		WearponID ++;
+		wearpons [WearponID].gameObject.SetActive (true);
+
+		currentWearpon = wearpons [WearponID];
+	}
+
+	public void Fire ()
+	{
+		currentWearpon.Fire ();
+	}
+		
 
 	void Start ()
 	{
@@ -37,14 +49,7 @@ public class WearponController : MonoBehaviour
 		}
 	}
 
-	public void SwitchWearpon ()
-	{
-		wearpons[WearponID].gameObject.SetActive(false);
-		WearponID ++;
-		wearpons [WearponID].gameObject.SetActive (true);
 
-		currentWearpon = wearpons [WearponID];
-	}
 
 	private void HideWearpons ()
 	{

@@ -16,7 +16,7 @@ public class MonstersPool : MonoSingleton <MonstersPool>
 	public List <GameObject> basicMonstersPrefabs;
 
 	//[HideInInspector]
-	public List <BasicMonster> monstersPool = null;
+	public List <MonsterBase> monstersPool = null;
 
 	static int monsterIndex = 0;
 
@@ -24,11 +24,11 @@ public class MonstersPool : MonoSingleton <MonstersPool>
 
 	void Start () 
 	{
-		monstersPool = new List<BasicMonster> (maxCountOfMonstersInPool);
+		monstersPool = new List<MonsterBase> (maxCountOfMonstersInPool);
 		FillPool (ref this.monstersPool);
 	}
 
-	public BasicMonster GetMonsterFromPool ()
+	public MonsterBase GetMonsterFromPool ()
 	{
 		var monster = monstersPool[monsterIndex];
 		monsterIndex ++;
@@ -38,7 +38,7 @@ public class MonstersPool : MonoSingleton <MonstersPool>
 		return monster;
 	}
 		
-	private void FillPool (ref List <BasicMonster> monstersPool)
+	private void FillPool (ref List <MonsterBase> monstersPool)
 	{
 		var enumValues = Enum.GetValues(typeof(MonsterType));
 
@@ -81,7 +81,7 @@ public class MonstersPool : MonoSingleton <MonstersPool>
 			}
 		}
 		if(monster != null)
-			monstersPool.Add (monster.GetComponent<BasicMonster> ());
+			monstersPool.Add (monster.GetComponent<MonsterBase> ());
 	}
 
 	private GameObject CreateSimpleMonster ()
@@ -100,7 +100,7 @@ public class MonstersPool : MonoSingleton <MonstersPool>
 				var sMonster = m.GetComponent<SimpleMonster> ();
 				var iMoveStrategy = m.AddComponent<FollowMonsterMovement> ();
 
-				sMonster.InitMonster(Vector3.zero, 10f, iMoveStrategy);
+				sMonster.InitMonster(Vector3.zero, 10f, GameConstants.REDUCING_HP_FROM_MONSTERS, iMoveStrategy);
 			}
 		}
 		return m;
@@ -121,7 +121,7 @@ public class MonstersPool : MonoSingleton <MonstersPool>
 				m = CreateMonsterGO (monsterPrefab);
 				var sMonster = m.GetComponent<FatMonster> ();
 				var iMoveStrategy = m.AddComponent<FollowMonsterMovement> ();
-				sMonster.InitMonster(Vector3.zero, 15f, iMoveStrategy);
+				sMonster.InitMonster(Vector3.zero, 15f, GameConstants.REDUCING_HP_FROM_MONSTERS, iMoveStrategy);
 			}
 		}
 		return m;
@@ -142,7 +142,7 @@ public class MonstersPool : MonoSingleton <MonstersPool>
 				m = CreateMonsterGO (monsterPrefab);
 				var sMonster = m.GetComponent<SpeedyMonster> ();
 				var iMoveStrategy = m.AddComponent<FollowMonsterMovement> ();
-				sMonster.InitMonster(m.transform.position, 10f, iMoveStrategy);
+				sMonster.InitMonster(m.transform.position, 10f, GameConstants.REDUCING_HP_FROM_MONSTERS, iMoveStrategy);
 			}
 		}
 		return m;

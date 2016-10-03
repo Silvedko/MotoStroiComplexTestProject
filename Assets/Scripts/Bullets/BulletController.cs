@@ -3,27 +3,29 @@ using System.Collections;
 
 public class BulletController : MonoBehaviour 
 {
-	public GameObject bulletPrefab;
+	public BulletBase bulletPrefab;
 	public Transform bulletSpawner;
 
 	private float bulletSpeed = 1000;
 
-	public void MakeShot () 
+	public void MakeShot (float damage) 
 	{
 		var bullet = CreateBullet (bulletPrefab);
 		bullet.transform.Rotate (Vector3.left * 90);
-
+		bullet.transform.position = bulletSpawner.position;
 		bullet.GetComponent<Rigidbody> ().AddForce(transform.forward * bulletSpeed);
+		bullet.Damage = damage;
 
-		Destroy (bullet, 5f);
+		bullet.DestroyBullet (5);
 	}
 
 
-
-	
-	// Update is called once per frame
-	GameObject CreateBullet (GameObject bulletPrefab) 
+	BulletBase CreateBullet (BulletBase bulletPrefab) 
 	{
-		return Instantiate (bulletPrefab, bulletSpawner.position, Quaternion.identity) as GameObject;
+		BulletBase bul = Instantiate (bulletPrefab);
+		return bul;
 	}
+
+
+		
 }

@@ -1,4 +1,4 @@
 ﻿public interface IDamageDealer 
 {
-	void Hit ();
+	float Damage { get; set; }
 }

@@ -1,24 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AutomaticWearpon : BasicWearpon 
+public class AutomaticWearpon : WearponBase 
 {
-	float automaticFireRate = 3f;
 
 	void Start () 
 	{
-		TouchController.OnFirstMouseButtonPressed += delegate() { OnFireButtonPressed (); };
-
-		this.fireRate = automaticFireRate;
+		this.fireRate = GameConstants.automaticFiraRate;
 	}
+		
 
-	protected override void Update ()
-	{
-		base.Update();
-	}
-
-	public override void OnFireButtonPressed ()
-	{
-		base.OnFireButtonPressed();
-	}
+//	public override void OnFireButtonPressed ()
+//	{
+//		base.OnFireButtonPressed();
+//	}
 }

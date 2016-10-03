@@ -16,4 +16,7 @@ public class GameConstants
 
 	public static readonly float DELAY_TO_INIT_MONSTERS = 2.0f;
 
+	public static readonly float pistolFireRate = 1;
+	public static readonly float automaticFiraRate = 0.3f;
+
 }

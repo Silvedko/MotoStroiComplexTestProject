@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class MainChar : BasicPerson 
+public class MainChar : PersonBase 
 {
 	WearponController wpController = null;
 
@@ -11,12 +11,18 @@ public class MainChar : BasicPerson
 	{
 		this.gameObject.transform.localPosition = position;
 
-		TouchController.OnSecondMouseButtonPressed += delegate {SwitchWearpon ();};
+		//TouchController.OnPrevWearponButtonPressed += SwitchWearpon;
+		TouchController.OnFireButtonDown += OnFireButtonDown;
 
 		if(hitPoints > 0)
 			HitPoints = hitPoints;
 		else 
 			Debug.LogWarning ("HitPoints must be positive!");
+	}
+
+	void OnFireButtonDown ()
+	{
+		wpController.Fire (); 
 	}
 		
 
@@ -31,19 +37,19 @@ public class MainChar : BasicPerson
 	}
 
 
-	public override void ReduceHitPoints (float hp)
+	public override void ReceiveDamage (IDamageDealer damageDealer)
 	{
-		HitPoints -= hp;
+		HitPoints -= damageDealer.Damage;
 	}
 
 	protected override void OnCollisionEnter (Collision col)
 	{
 		try
 		{
-			BasicMonster monster = col.gameObject.GetComponent<BasicMonster> ();
+			MonsterBase monster = col.gameObject.GetComponent<MonsterBase> ();
 			if(monster != null)
 			{
-				ReduceHitPoints (GameConstants.REDUCING_HP_FROM_MONSTERS);
+				ReceiveDamage (monster);
 			}
 		}
 		catch (NullReferenceException)

@@ -1,6 +1,7 @@
 ﻿public interface IHittable 
 {
-	void ReduceHitPoints (float hp);
-	void OnDead ();
-	float GetHitPoints ();
+	float HitPoints { get; set; }
+	float Armor { get; set; }
+	bool IsDead { get; set; }
+	void ReceiveDamage (IDamageDealer damageDealer);
 }
