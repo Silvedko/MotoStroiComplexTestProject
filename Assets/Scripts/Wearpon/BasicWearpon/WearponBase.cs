@@ -11,27 +11,15 @@ public class WearponBase : MonoBehaviour
 	protected float fireRate = 0;
 	protected bool canFire = true;
 
-	public void Fire ()
+	public virtual void Fire ()
 	{
-		if(canFire)
-			Shot ();
+		Shot ();
 	}
-
-
-//	void Update ()
-//	{
-//		timeAfterShot += Time.time;
-//		Debug.Log (timeAfterShot);
-//		if(timeAfterShot >= fireRate)
-//		{
-//			canFire = true;
-//			timeAfterShot = 0;
-//		}
-//	}
 
 	void Shot ()
 	{
-		StartCoroutine (FireWithDelay (fireRate));
+		if(canFire)
+			StartCoroutine (FireWithDelay (fireRate));
 	}
 
 	IEnumerator FireWithDelay (float delay)

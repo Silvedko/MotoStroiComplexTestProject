@@ -32,6 +32,7 @@ public class MonsterBase : PersonBase, IDamageDealer
 
 	public override void ReceiveDamage (IDamageDealer damageDealer)
 	{
+		Debug.Log (damageDealer);
 		base.ReceiveDamage (damageDealer);
 	}
 

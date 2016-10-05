@@ -37,6 +37,11 @@ public class BulletBase : MonoBehaviour, IDamageDealer
 		StartCoroutine (DestroyBulletWithDelay(delay));
 	}
 
+	/// <summary>
+	/// Destroies the bullet with delay if bullet not hit any obstacle.
+	/// </summary>
+	/// <returns>The bullet with delay.</returns>
+	/// <param name="delay">Delay.</param>
 	IEnumerator DestroyBulletWithDelay (float delay)
 	{
 		yield return new WaitForSeconds (delay);
